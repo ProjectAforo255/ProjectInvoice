@@ -1,0 +1,21 @@
+{
+  "name": "projectinvoice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nacos": "^2.5.0",
+    "node-fetch": "^2.6.7",
+    "pg": "^8.8.0",
+    "zipkin": "^0.22.0",
+    "zipkin-instrumentation-express": "^0.22.0",
+    "zipkin-transport-http": "^0.22.0"
+  }
+}
