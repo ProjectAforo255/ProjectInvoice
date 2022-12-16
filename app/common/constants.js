@@ -1,4 +1,4 @@
-const APP_NAME = 'InvoiceApp';
+const APP_NAME = 'seq_log';
 const ZIPKIN_LOCAL_ENDPOINT= 'http://localhost:9411';
 const ZIPKIN_SERVICE_NAME= 'invoice-service';
 

@@ -10,8 +10,8 @@ const getInvoiceById = async (req, res) => {
 }
 
 const addInvoice = async (req, res) => {
-    const { amount, customerId, fullname } = req.body
-    return res.send(await invoiceService.addInvoice(amount, customerId, fullname))
+    const { amount, state } = req.body
+    return res.send(await invoiceService.addInvoice(amount, state))
 }
 
 module.exports = { getInvoices, getInvoiceById, addInvoice }
