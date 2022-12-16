@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-invoice
+spec:
+  type: ClusterIP
+  selector:
+    app: service-invoice
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5002
+    name: http

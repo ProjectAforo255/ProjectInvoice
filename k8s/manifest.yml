@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-invoice
+  labels:
+    app: service-invoice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-invoice
+  template:
+    metadata:
+      labels:
+        app: service-invoice
+    spec:
+      containers:
+      - name: app-invoice
+        image: holgadom/app-invoices:3
+        ports:
+        - containerPort: 5002
+        env:
+        - name: NACOS_PORT
+          value: "8848"
+        - name: NACOS_SERVERADDR
+          value: "146.190.15.39"
+        - name: NACOS_NAMESPACE
+          value: "public"
+        - name: NACOS_IDENTITYKEY
+          value: "nacos"
+        - name: NACOS_IDENTITYVALUE
+          value: "nacos"
+        - name: NACOS_DATAID
+          value: "public"
+        - name: NACOS_GROUP
+          value: "DEFAULT_GROUP"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-invoice
+spec:
+  type: ClusterIP
+  selector:
+    app: service-invoice
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5002
+    name: http
