@@ -15,6 +15,9 @@ const logger = winston.createLogger({
 const logProvider = {
     info: (message) => {
         logger.info(message, {aplication: APP_NAME});
+    },
+    error: (message) =>{
+      logger.error(message,{ aplication: APP_NAME })
     }
 }
  

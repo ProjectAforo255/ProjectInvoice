@@ -57,7 +57,7 @@ async function init_kafka_consumer(){
         const pool = new Pool({
             user: process.env.DB_POSTGRES_USER,
             password: process.env.DB_POSTGRES_PASSWORD,
-            database: process.env.DB_POSTGRES_DATABASE_ACCOUNT,
+            database: process.env.DB_POSTGRES_DATABASE_INVOICE,
             host: process.env.DB_POSTGRES_HOST,
             port: process.env.DB_POSTGRES_PORT,
             ssl: { 
@@ -81,12 +81,13 @@ async function init_kafka_consumer(){
                     amountNew = jsonObj.amount;
                 }
     
-                pool.query('UPDATE account SET amount = amount + $1 WHERE id= $2',[amountNew, jsonObj.accountId], async (err, result)=>{
+                pool.query('UPDATE invoice SET amount = amount + $1 WHERE id= $2',[amountNew, jsonObj.invoiceId], async (err, result)=>{
                     if( err ){
-                        logProvider.info('Error executing query', err.stack)
+                        logProvider.error('Error executing query')
+                        console.log('Error query => ',  err.stack);
                         return;
                     }
-                    logProvider.info('Account modifield with accountId: ', jsonObj.accountId)
+                    logProvider.info(`INVOICE modifield ID: ${jsonObj.invoiceId} `)
                     await consumer.commitOffsets([{topic, partition, offset: ( Number(message.offset)+1).toString() }])
                 })
             }
