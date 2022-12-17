@@ -81,7 +81,7 @@ async function init_kafka_consumer(){
                     amountNew = jsonObj.amount;
                 }
     
-                pool.query('UPDATE invoice SET amount = amount + $1 WHERE id= $2',[amountNew, jsonObj.invoiceId], async (err, result)=>{
+                pool.query('UPDATE invoice SET amount = amount + $1, state = 1 WHERE id= $2',[amountNew, jsonObj.invoiceId], async (err, result)=>{
                     if( err ){
                         logProvider.error('Error executing query')
                         console.log('Error query => ',  err.stack);
